@@ -4,7 +4,6 @@ let secondNumber = parseInt(enterNumber(firstNumber));
 
 
 let randomNumber = Math.round(Math.random()*(secondNumber - firstNumber) + firstNumber);
-alert(randomNumber);
 findNumber(randomNumber);
 
 function findNumber(num) {
@@ -14,22 +13,32 @@ function findNumber(num) {
     let counter = 0;
     while (isIncorrect) {
         counter++;
-        varNum = parseInt(prompt('угадайте число'));
+        varNum = parseInt(prompt('Try to guess the number.'));
         if(varNum === num) {
-            alert('Win');
+            if(counter === 1) {
+                alert ('Great! It’s like you knew the number!');
+            }
+            else {
+                alert (`You did it in ${counter} attempts. Congratulations!`);
+            }
             isIncorrect = false;
         }
         else if (((varNum + 1) === num) || ((varNum - 1) ===num)) {
-            alert('Almos');
+            alert('You’re almost there!');
             differnt = Math.abs(num - varNum);
         }
         else if (Math.abs(num - varNum) >= differnt) {
-            alert('Colder');
+            if(counter === 1) {
+                alert('Cold.');
+            }
+            else {
+                alert('Colder.');
+            }
             differnt = Math.abs(num - varNum);
 
         }
         else {
-            alert('Warmer');
+            alert('Warmer.');
             differnt = Math.abs(num - varNum);
         }
     }
@@ -45,10 +54,10 @@ function enterNumber(fNumber) {
     let secondValidation = false;
 
     if (fNumber === undefined) {
-        text = 'Введите первое число';
+        text = 'Enter the first positive number.';
     }
     else {
-        text = 'Введите второе число';
+        text = 'Enter the second positive number';
         isFirst = false;
         secondValidation = true;
     }
@@ -59,7 +68,7 @@ function enterNumber(fNumber) {
             firstValidation = false;
         }
         else {
-            alert('Please enter only positive numbers');
+            alert('Please enter only positive numbers.');
         }
     }
 
@@ -68,7 +77,7 @@ function enterNumber(fNumber) {
             secondValidation = false;
         }
         else {
-            alert(`Please enter a number greater than ${fNumber + 100}`);
+            alert(`Please enter a number greater than ${fNumber + 100}.`);
             number = prompt(text);
         }
     }

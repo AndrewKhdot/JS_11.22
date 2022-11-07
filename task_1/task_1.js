@@ -1,19 +1,20 @@
-console.log('start');
-let obj1 = {a: 1, b: 'a', c: [1, 2, {a:1, b: 'q'}]};
-let obj2 = {};
-let obj3 = {};
-let obj4 = {};
-
-let cop = makeDeepCopy(obj1);
-
-console.log('finish');
 
 function makeDeepCopy (object) { 
-    
-
+    if((typeof object === 'object') && !object) {
+        throw new Error();
+    }
+    else if (typeof object != 'object'){
+        throw new Error();
+    }
+    else if (Array.isArray(object)){
+        throw new Error();
+    }
     return copyFields(object);
 
+    
+
     function copyFields(obj) {
+    
     let objectsCopy = {};
     let objectKeys = Object.keys(obj);
         for (let key of objectKeys) {
@@ -23,10 +24,34 @@ function makeDeepCopy (object) {
             else if(Array.isArray(obj)) {
                 let copyArray = [];
                 for (let i = 0; i < obj.length; i++) {
-                    copyArray[i] = obj[i]; 
+                    if((typeof obj[key] === 'object') && !obj[key]) {
+                        copyArray[i] = copyFields(obj[i]); }
+                    else {
+                        copyArray[i] = obj[i];
+                    }
                 }
                 return copyArray; 
             }
+            else if(Object.getPrototypeOf(obj) === Map.prototype) {
+                let copyMap = new Map();
+                for (let key of obj.keys()) {
+                    if((typeof obj[key] === 'object') && !obj[key]) {
+                        let val = copyFields(obj[key]);
+                        copyMap.set(key, val);
+                         }
+                        else {
+                        copyMap.set(key, obj[key]);
+                        }
+                  }
+                  
+                return copyMap; 
+            }
+            else if(Object.getPrototypeOf(obj) === Set.prototype) {
+                let copySet = new Set(obj);
+                  
+                return copySet; 
+            }
+
             else {
                 objectsCopy[key] = obj[key];
             }
@@ -34,5 +59,4 @@ function makeDeepCopy (object) {
         }
         return objectsCopy;
     }
-    console.log('finish');
 }

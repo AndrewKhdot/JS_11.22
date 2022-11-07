@@ -1,8 +1,3 @@
-let iterebal = createIterable(6, 2);
-
-for (const iterator of iterebal) {
-    console.log(iterator)
-}
 
 function createIterable (from, to) {
     if(typeof from != 'number' || typeof to != 'number' || arguments.length <= 1 || to - from <= 0 ) {

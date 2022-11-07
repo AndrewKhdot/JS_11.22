@@ -20,8 +20,6 @@ function createIterable (from, to) {
             else {
                 return {done: true}
             }
-            
-
         }
         return returnObject;
     }

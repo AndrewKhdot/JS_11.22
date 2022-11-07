@@ -1,8 +1,9 @@
-let t1 = [[0, 1, 2, 3, 4, 5], 2, 4];
 
-let r = selectFromInterval(...t1);
-console.log(r);
 function selectFromInterval (arr, start, finish) {
+
+    if (!arrayValidation(arr)) {
+        throw new Error();
+    }
 
     let from = Math.min(start, finish);
     let to = Math.max(start, finish);
@@ -13,10 +14,37 @@ function selectFromInterval (arr, start, finish) {
         counter++;
         
     }
+
+    while ((typeof result[result.length - 1] === 'undefined') ) {
+        if(result.length === 0) {
+            break;
+        }
+        else {
+            result.length = result.length -1;
+        }
+    }
+
+    result.reverse();
+
+    while ((typeof result[result.length - 1] === 'undefined') ) {
+        if(result.length === 0) {
+            break;
+        }
+        else {
+            result.length = result.length -1;
+        }
+    }
+    result.reverse();
+
+
     return result;
     function arrayValidation (array) {
+        if(!Array.isArray(array)){
+            return false;
+        }
+        
         for (let i = 0; i < array.length; i++) {
-            if (isNaN(array[i])) {
+            if (typeof array[i] === 'number') {
                 return  false;
             }
         }

@@ -1,9 +1,7 @@
-let firstNumber = parseInt(enterNumber());
-let secondNumber = parseInt(enterNumber(firstNumber));
+const firstNumber = parseInt(enterNumber());
+const secondNumber = parseInt(enterNumber(firstNumber));
 
-
-
-let randomNumber = Math.round(Math.random()*(secondNumber - firstNumber) + firstNumber);
+const randomNumber = Math.round(Math.random()*(secondNumber - firstNumber) + firstNumber);
 findNumber(randomNumber);
 
 function findNumber(num) {
@@ -35,20 +33,16 @@ function findNumber(num) {
                 alert('Colder.');
             }
             differnt = Math.abs(num - varNum);
-
         }
         else {
             alert('Warmer.');
             differnt = Math.abs(num - varNum);
         }
     }
-
-
 }
 
 function enterNumber(fNumber) {
     let text;
-    let isFirst = true;
     let number;
     let firstValidation = true;
     let secondValidation = false;
@@ -58,7 +52,6 @@ function enterNumber(fNumber) {
     }
     else {
         text = 'Enter the second positive number';
-        isFirst = false;
         secondValidation = true;
     }
 

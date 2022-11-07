@@ -1,5 +1,5 @@
-let firstNumber = prompt('Enter the first number');
-let secondNumber = prompt('Enter the first number');
+const firstNumber = prompt('Enter the first number');
+const secondNumber = prompt('Enter the second number');
 
 if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
     firstNumber = Number(firstNumber);

@@ -1,19 +1,12 @@
 Array.prototype.customFilter = function (func, obj) {
     
-   /*  if (obj != undefined) {
-        object = obj;
-    }
-    let funct = func.call(object); */
     let copyArray = [];
-    let newFunc = func.call(obj, this);
-/*     for (let i = 0; i < this.length; i++) {
-        let val = this[i];
-        let array = this;
-        if(newFunc(val, i, array)) {
-        console.log(a);
+
+    for (let i = 0; i < this.length; i++) {
+        if(func.call(obj, this[i], i, this)) {
         copyArray.push(this[i]);
     }
-} */
+}
     return copyArray;
 }
 
@@ -39,6 +32,7 @@ function checkFunc2 (element, index) {
 
 function checkFunc3 (element, index, array) {
     if((element > 4) || index % 2 ===0 || array.length % element === 0) {
+        console.log(this.a);
         return true
     }
     else {

@@ -1,12 +1,14 @@
-createDebounceFunction(ceckfun, 10000);
+let deb = createDebounceFunction(ceckfun, 10000);
 
+deb();
 
-
-setTimeout(createDebounceFunction, 5000);
+setTimeout(deb, 5000);
 
 
 function createDebounceFunction (func, delay) {
-    if(arguments.length != 0) {
+    function callbackFunc () {
+        initiator(++counter);
+/*     if(arguments.length != 0) {
         validation(func, delay);
         this.counter = 0;
         this.funct = func;
@@ -15,19 +17,20 @@ function createDebounceFunction (func, delay) {
         initiator(++this.counter);
     }
     else {
+        initiator(++this.counter);
         console.log(`второй запуск ${counter} ${new Date()}`);
-    }
+    } */
 
     function initiator (x) {
         console.log(`запуск инициатора ${counter} ${new Date()}`);
         this.count = x;
         function check (currentCounter, globalCounter) {
             if(currentCounter - globalCounter == 0){
-                funct();
+                func();
                 console.log(`Конец фунуции ${counter} ${new Date()}`);
             }
             else {
-                console.log(`конец первого ${new Date()}`);
+                console.log(`конец первого ${counter} ${new Date()}`);
             }
         }
         setTimeout(check, delay, count, counter);
@@ -36,6 +39,14 @@ function createDebounceFunction (func, delay) {
 
     }
 }
+    let obj = {
+        func: func,
+        counter : 0,
+        delay :delay
+    }
+    return callbackFunc.call(obj);
+}
+
 function ceckfun () {
     console.log(100);
 }

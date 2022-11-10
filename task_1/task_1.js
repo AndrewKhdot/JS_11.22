@@ -5,7 +5,7 @@ Array.prototype.customFilter = function (func, obj) {
     }
     let funct = func.call(object); */
     let copyArray = [];
-   
+    let newFunc = func.call(obj, this);
 /*     for (let i = 0; i < this.length; i++) {
         let val = this[i];
         let array = this;

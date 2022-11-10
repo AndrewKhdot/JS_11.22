@@ -2,49 +2,38 @@ let deb = createDebounceFunction(ceckfun, 10000);
 
 deb();
 
-setTimeout(deb, 5000);
+setTimeout(deb, 1000);
+setTimeout(deb, 2000);
+setTimeout(deb, 3000);
 
 
 function createDebounceFunction (func, delay) {
+    let counter = 0;
     function callbackFunc () {
-        initiator(++counter);
-/*     if(arguments.length != 0) {
-        validation(func, delay);
-        this.counter = 0;
-        this.funct = func;
-        this.delay = delay;
-        console.log(`создание функции ${new Date()}`);
-        initiator(++this.counter);
-    }
-    else {
-        initiator(++this.counter);
-        console.log(`второй запуск ${counter} ${new Date()}`);
-    } */
-
-    function initiator (x) {
-        console.log(`запуск инициатора ${counter} ${new Date()}`);
-        this.count = x;
-        function check (currentCounter, globalCounter) {
-            if(currentCounter - globalCounter == 0){
-                func();
-                console.log(`Конец фунуции ${counter} ${new Date()}`);
-            }
-            else {
-                console.log(`конец первого ${counter} ${new Date()}`);
-            }
+        counter++;
+        let obj = {count: counter};
+        initiator.call(obj);
+        function initiator () {
+            console.log(`запуск инициатора ${this.count} ${new Date()}`);
+            let count = this.count;
+            function check () {
+                if(count - counter == 0){
+                    func();
+                    console.log(`Конец фунуции ${count} ${new Date()}`);
+                }
+                else {
+                    console.log(`конец инициатора${count} ${new Date()}`);
+                }
+            }   
+            setTimeout(check, delay);
         }
-        setTimeout(check, delay, count, counter);
-    }
     function validation (fun, del) {
 
     }
 }
-    let obj = {
-        func: func,
-        counter : 0,
-        delay :delay
-    }
-    return callbackFunc.call(obj);
+    callbackFunc.func = func;
+    callbackFunc.delay = delay;
+    return callbackFunc;
 }
 
 function ceckfun () {

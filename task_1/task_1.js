@@ -1,5 +1,13 @@
 Array.prototype.customFilter = function (func, obj) {
-    
+    if(typeof func != 'function') {
+        throw new Error;
+    }
+    if(arguments.length >= 2) {
+        if((typeof obj != 'object') || (typeof obj === 'object'  && !obj)) {
+          
+            throw new Error;
+        }
+    }
     let copyArray = [];
 
     for (let i = 0; i < this.length; i++) {
@@ -10,37 +18,3 @@ Array.prototype.customFilter = function (func, obj) {
     return copyArray;
 }
 
-let nAr = [1, 2, 3, 4, 5, 6];
-
-function checkFunc (element) {
-    if(element > 2) {
-        return true
-    }
-    else {
-        return false
-    }
-}
-
-function checkFunc2 (element, index) {
-    if((element > 2) || index % 2 ===0) {
-        return true
-    }
-    else {
-        return false
-    }
-}
-
-function checkFunc3 (element, index, array) {
-    if((element > 4) || index % 2 ===0 || array.length % element === 0) {
-        console.log(this.a);
-        return true
-    }
-    else {
-        return false
-    }
-}
-let obj = {a: 1, b:2};
-
-
-let checkAr = nAr.customFilter(checkFunc3, obj);
-console.log(checkAr);

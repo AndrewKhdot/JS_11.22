@@ -1,5 +1,8 @@
 class Calculator {
     constructor(x, y) {
+        if((typeof x !== 'number') || isNaN(x) || !isFinite(x) || (typeof y !== 'number') || isNaN(y) || !isFinite(y)) {
+            throw new Error;
+        }
         this.setX(x);
         this.setY(y);
         this.getSum = this.Sum.bind(this);
@@ -32,12 +35,9 @@ class Calculator {
         return this.x - this.y;
       }
       Div() {
+        if(this.y === 0) {
+            throw new Error; 
+        }
         return this.x / this.y;
       }
 }
-
-let cal = new Calculator(1, 2);
-console.log(cal.gS());
-cal.setX(5);
-let fun = cal.gS;
-console.log(fun());

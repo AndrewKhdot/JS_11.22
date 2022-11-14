@@ -34,9 +34,6 @@ class Calculator {
       Div() {
         return this.x / this.y;
       }
-
- 
-    
 }
 
 let cal = new Calculator(1, 2);

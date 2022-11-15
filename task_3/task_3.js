@@ -7,6 +7,7 @@ class  RickAndMorty {
         .then(response => response.json())
         .catch(alert);
     }   
+    
     async check(res) {
         if(!res.ok) {
          throw new Error(res.status)

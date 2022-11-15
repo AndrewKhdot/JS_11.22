@@ -3,10 +3,15 @@ class  RickAndMorty {
         let url = 'https://rickandmortyapi.com/api/character/';
         url = url + x;
         fetch(url)
-        .then(response.ok ? response: new Error(response.status) )
+        .then(response => this.check(response))
         .then(response => response.json())
-        .catch(alert(err));
+        .catch(alert);
     }   
+    async check(res) {
+        if(!res.ok) {
+         throw new Error(res.status)
+        }
+    }
 
     async getEpisode(x) {
         let url = 'https://rickandmortyapi.com/api/episode/';
@@ -24,10 +29,6 @@ class  RickAndMorty {
         catch(err){
             alert(err);
         }
-        
-      
     }  
 }
-let rm = new RickAndMorty();
-rm.getCharacter(1);
 

@@ -110,7 +110,6 @@ class LinkedList {
     }
 }
 
-
 class Stack {
     #last;
     #currentLength;
@@ -216,10 +215,6 @@ class Stack {
         return stackResult;
     }
 }
-
-
-
-
 
 class Car {
     #brand;
@@ -444,15 +439,40 @@ class Car {
         if(!this.#numValidation(time) || val === 0) {
             throw new Error('Invalid duration');
         }
+        if(!this.#isStarted) {
+            throw new Error('You have to start your car first');
+        }
+        let dur = speed * time;
+        let loseFluel = dur/(100 * this.#fuelConsumption);
+        let takenDam = this.#damage * dur/100;
+        if(this.#currentFuelVolume - loseFluel < 0) {
+            throw new Error('You don\'t have enough fuel');
+        }
+        else if(this.#health - takenDam < 0) {
+            throw new Error('Your car won\'t make it');
+        }
+        else {
+            this.#health = this.#health - takenDam;
+            this.#currentFuelVolume = this.#currentFuelVolume - loseFluel;
+            this.#mileage = this.#mileage + dur;
+        }
 
     }
 
     repair() {
-
+        if(this.#isStarted) {
+            throw new Error('You have to shut down your car first');
+        }
+        else if(this.#maxFuelVolume - this.#currentFuelVolume > 0) {
+            throw new Error('You have to fill up your gas tank first');
+        }
+        else {
+            this.#health = 100;
+        }
     }
 
     getFullAmount() {
-
+        return this.#maxFuelVolume - this.#currentFuelVolume;
     }
 }
 

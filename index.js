@@ -270,7 +270,7 @@ class Car {
         this.#fuelConsumption = 1;
         this.#damage = 1;
         this.#mileage = 0;
-        this.health = 100;
+        this.#health = 100;
     }
 
     get brand() {
@@ -427,16 +427,16 @@ class Car {
             throw new Error('You have to shut down your car first');
         }
         else {
-            this.#currentFuelVolum =  this.#currentFuelVolume + val;
+            this.#currentFuelVolume = this.#currentFuelVolume + val;
         }
-        return this.#currentFuelVolume;
+       
     }
 
     drive(speed, time) {
-        if(!this.#numValidation(speed) || val === 0) {
+        if(!this.#numValidation(speed) || speed === 0) {
             throw new Error('Invalid speed');
         }
-        if(!this.#numValidation(time) || val === 0) {
+        if(!this.#numValidation(time) || speed === 0) {
             throw new Error('Invalid duration');
         }
         if(!this.#isStarted) {
@@ -476,3 +476,15 @@ class Car {
     }
 }
 
+
+
+
+let car = new Car;
+/* console.log(car.brand);
+car.brand= 'mmm';
+console.log(car.brand); */
+car.fillUpGasTank(20);
+car.start();
+car.drive(95, 1);
+console.log(car.health);
+console.log(car.getFullAmount());

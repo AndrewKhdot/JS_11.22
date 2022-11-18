@@ -475,16 +475,3 @@ class Car {
         return this.#maxFuelVolume - this.#currentFuelVolume;
     }
 }
-
-
-
-
-let car = new Car;
-/* console.log(car.brand);
-car.brand= 'mmm';
-console.log(car.brand); */
-car.fillUpGasTank(20);
-car.start();
-car.drive(95, 1);
-console.log(car.health);
-console.log(car.getFullAmount());
